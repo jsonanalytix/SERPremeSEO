@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import GoogleTagManager from "@/components/analytics/GoogleTagManager";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -31,7 +32,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${playfair.variable} font-sans`}>{children}</body>
+      <head>
+        {/* Disable browser scroll restoration - must run before hydration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (history.scrollRestoration) {
+                history.scrollRestoration = 'manual';
+              }
+              window.scrollTo(0, 0);
+            `,
+          }}
+        />
+      </head>
+      <body className={`${inter.variable} ${playfair.variable} font-sans`}>
+        {/* Analytics Scripts - Next.js Script components automatically inject into head */}
+        <GoogleTagManager />
+        {children}
+      </body>
     </html>
   );
 }

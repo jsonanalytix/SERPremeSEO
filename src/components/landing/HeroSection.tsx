@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import HeroForm from "./HeroForm";
 import { heroContent } from "@/content/plasticSurgeryWebDesign";
 
@@ -64,6 +65,16 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ onViewPortfolio }: HeroSectionProps) {
+  // Scroll to top on mount to prevent browser scroll restoration
+  useEffect(() => {
+    // Disable browser's automatic scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    // Scroll to top immediately
+    window.scrollTo(0, 0);
+  }, []);
+
   const scrollToForm = () => {
     const heroForm = document.getElementById("hero-form");
     if (heroForm) {

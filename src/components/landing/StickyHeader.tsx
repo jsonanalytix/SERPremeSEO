@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { trackPhoneClick } from "@/lib/tracking/events";
 import { siteConfig } from "@/content/plasticSurgeryWebDesign";
-import { formatPhoneLink } from "@/lib/tracking/callrail";
+import { formatPhoneLink } from "@/lib/tracking/google-ads";
 
 interface StickyHeaderProps {
   onGetQuoteClick?: () => void;
@@ -73,7 +73,7 @@ export default function StickyHeader({ onGetQuoteClick }: StickyHeaderProps) {
             <a
               href={formatPhoneLink(siteConfig.phoneNumber)}
               onClick={handlePhoneClick}
-              className="flex items-center text-secondary-700 hover:text-primary-600 transition-colors font-medium callrail-number"
+              className="flex items-center text-secondary-700 hover:text-primary-600 transition-colors font-medium"
             >
               <svg
                 className="w-5 h-5 mr-2"

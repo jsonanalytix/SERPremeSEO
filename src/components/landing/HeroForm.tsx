@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { 
@@ -11,6 +11,7 @@ import {
 import { trackFormSubmit } from "@/lib/tracking/events";
 import { heroContent } from "@/content/plasticSurgeryWebDesign";
 import { handlePhoneInput } from "@/lib/utils/phoneFormatter";
+import { captureAttribution, getAttributionData } from "@/lib/utils/attributionCapture";
 
 interface HeroFormProps {
   formLocation?: "hero" | "final_cta";
@@ -41,6 +42,11 @@ export default function HeroForm({
   // Watch phone field for formatting
   const phoneValue = watch("phone");
 
+  // Capture UTM parameters and click IDs on mount
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   const onSubmit = async (data: LeadFormData) => {
     setFormState("submitting");
     setErrorMessage("");
@@ -49,13 +55,19 @@ export default function HeroForm({
       // Track the form submission
       trackFormSubmit(formLocation, data.practiceName);
       
-      // Submit to API
+      // Get attribution data (UTMs, click IDs, session context)
+      const attribution = getAttributionData();
+      
+      // Submit to API with form data and attribution
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          ...attribution,
+        }),
       });
 
       const result = await response.json();

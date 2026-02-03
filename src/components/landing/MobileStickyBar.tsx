@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { trackPhoneClick } from "@/lib/tracking/events";
 import { siteConfig } from "@/content/plasticSurgeryWebDesign";
-import { formatPhoneLink } from "@/lib/tracking/callrail";
+import { formatPhoneLink } from "@/lib/tracking/google-ads";
 
 interface MobileStickyBarProps {
   onGetQuoteClick?: () => void;
@@ -56,7 +56,7 @@ export default function MobileStickyBar({ onGetQuoteClick }: MobileStickyBarProp
         <a
           href={formatPhoneLink(siteConfig.phoneNumber)}
           onClick={handlePhoneClick}
-          className="flex-1 flex items-center justify-center gap-2 bg-secondary-900 text-white font-semibold text-base hover:bg-secondary-800 transition-colors callrail-number"
+          className="flex-1 flex items-center justify-center gap-2 bg-secondary-900 text-white font-semibold text-base hover:bg-secondary-800 transition-colors"
         >
           <svg
             className="w-5 h-5"

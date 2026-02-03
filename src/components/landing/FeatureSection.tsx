@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { featuresContent } from "@/content/plasticSurgeryWebDesign";
 
 // Feature icon component
@@ -98,13 +98,44 @@ export default function FeatureSection() {
   );
   const [isNavSticky, setIsNavSticky] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const navScrollRef = useRef<HTMLElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+
+  // Track if this is the initial mount (to prevent scroll on page load)
+  const hasMounted = useRef(false);
+
+  // Scroll active tab into view within the nav container only (not the page)
+  const scrollTabIntoView = useCallback((featureId: string) => {
+    const activeButton = buttonRefs.current.get(featureId);
+    const navContainer = navScrollRef.current;
+    
+    if (activeButton && navContainer) {
+      // Calculate scroll position to center the button in the nav container
+      const buttonRect = activeButton.getBoundingClientRect();
+      const containerRect = navContainer.getBoundingClientRect();
+      const scrollLeft = navContainer.scrollLeft + buttonRect.left - containerRect.left - (containerRect.width / 2) + (buttonRect.width / 2);
+      
+      navContainer.scrollTo({
+        left: scrollLeft,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
+  // Only scroll tab into view after initial mount (not on page load)
+  useEffect(() => {
+    if (hasMounted.current) {
+      scrollTabIntoView(activeFeature);
+    } else {
+      hasMounted.current = true;
+    }
+  }, [activeFeature, scrollTabIntoView]);
 
   useEffect(() => {
     const handleScroll = () => {
       if (!navRef.current || !sectionRef.current) return;
 
-      const navRect = navRef.current.getBoundingClientRect();
       const sectionRect = sectionRef.current.getBoundingClientRect();
 
       // Make nav sticky when it reaches top of viewport
@@ -188,12 +219,18 @@ export default function FeatureSection() {
           }`}
         >
           <div className={isNavSticky ? "section-container" : ""}>
-            <nav className="flex overflow-x-auto py-2 px-2 gap-1 scrollbar-hide">
+            <nav 
+              ref={navScrollRef}
+              className="flex overflow-x-auto py-2 px-2 gap-1 scrollbar-hide"
+            >
               {featuresContent.features.map((feature) => (
                 <button
                   key={feature.id}
+                  ref={(el) => {
+                    if (el) buttonRefs.current.set(feature.id, el);
+                  }}
                   onClick={() => scrollToFeature(feature.id)}
-                  className={`flex-shrink-0 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
+                  className={`flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
                     activeFeature === feature.id
                       ? "bg-primary-600 text-white shadow-md shadow-primary-600/30"
                       : "text-secondary-600 hover:bg-secondary-100 hover:text-secondary-800"

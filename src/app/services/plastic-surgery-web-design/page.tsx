@@ -6,6 +6,7 @@ import {
   FAQ,
   FeatureSection,
 } from "@/components/landing";
+import TrackedPhoneLink from "@/components/landing/TrackedPhoneLink";
 import {
   problemSolutionContent,
   checklistContent,
@@ -15,7 +16,6 @@ import {
   finalCtaContent,
   siteConfig,
 } from "@/content/plasticSurgeryWebDesign";
-import { formatPhoneLink } from "@/lib/tracking/callrail";
 
 // Icons for checklist section
 const ChecklistIcon = ({ type }: { type: string }) => {
@@ -775,15 +775,16 @@ export default function PlasticSurgeryWebDesignPage() {
                 <span className="text-secondary-400 text-sm mb-1">
                   {finalCtaContent.phoneLabel}
                 </span>
-                <a
-                  href={formatPhoneLink(siteConfig.phoneNumber)}
-                  className="flex items-center gap-2 text-xl md:text-2xl font-semibold text-white hover:text-primary-300 transition-colors callrail-number"
+                <TrackedPhoneLink
+                  phoneNumber={siteConfig.phoneNumber}
+                  clickLocation="inline"
+                  className="flex items-center gap-2 text-xl md:text-2xl font-semibold text-white hover:text-primary-300 transition-colors"
                 >
                   <svg className="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   {siteConfig.phoneNumber}
-                </a>
+                </TrackedPhoneLink>
               </div>
             </div>
 
@@ -823,7 +824,7 @@ export default function PlasticSurgeryWebDesignPage() {
       {/* Footer spacer for mobile sticky bar */}
       <div className="h-16 md:hidden" />
 
-      {/* Structured Data */}
+      {/* Structured Data - Service Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -831,14 +832,84 @@ export default function PlasticSurgeryWebDesignPage() {
             "@context": "https://schema.org",
             "@type": "Service",
             name: "Plastic Surgery Web Design",
+            description:
+              "Premium web design services for plastic surgery practices. HIPAA-conscious infrastructure, conversion-focused design, and SEO-ready structure built to generate consult requests.",
             provider: {
               "@type": "Organization",
               name: "SERPreme SEO",
+              url: "https://serpremeseo.com",
+              logo: "https://serpremeseo.com/brand/serpremeseo-logo.png",
             },
             serviceType: "Web Design",
-            areaServed: "United States",
+            areaServed: {
+              "@type": "Country",
+              name: "United States",
+            },
+            offers: {
+              "@type": "Offer",
+              priceCurrency: "USD",
+              price: "2000",
+            },
+          }),
+        }}
+      />
+
+      {/* Structured Data - Organization Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "SERPreme SEO",
+            url: "https://serpremeseo.com",
+            logo: "https://serpremeseo.com/brand/serpremeseo-logo.png",
             description:
-              "Premium web design services for plastic surgery practices. HIPAA-conscious infrastructure, conversion-focused design, and SEO-ready structure.",
+              "Premium web design and SEO services for healthcare practices. HIPAA-conscious, conversion-focused, and built for results.",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Southern New Hampshire",
+              addressRegion: "NH",
+              addressCountry: "US",
+            },
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+1-978-219-9301",
+              contactType: "Customer Service",
+              areaServed: "US",
+              availableLanguage: "English",
+            },
+          }),
+        }}
+      />
+
+      {/* Structured Data - Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://serpremeseo.com",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Services",
+                item: "https://serpremeseo.com/services",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: "Plastic Surgery Web Design",
+                item: "https://serpremeseo.com/services/plastic-surgery-web-design",
+              },
+            ],
           }),
         }}
       />
