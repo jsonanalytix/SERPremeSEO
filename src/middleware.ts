@@ -6,30 +6,34 @@
  * Refreshes session tokens on each request.
  * 
  * @created 2026-02-03 - Auth middleware for admin CRM
+ * @updated 2026-02-03 - Limited matcher to /admin routes only
  */
 
 import { NextRequest, NextResponse } from 'next/server'
 import { createMiddlewareClient } from '@/lib/supabase/server'
 
-// Routes that require authentication
-const protectedRoutes = ['/admin']
 // Routes that should redirect to /admin/leads if already authenticated
 const authRoutes = ['/admin/login']
 
 export async function middleware(request: NextRequest) {
-  const { supabase, response } = createMiddlewareClient(request)
   const { pathname } = request.nextUrl
+
+  // Skip middleware if Supabase is not configured
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    console.warn('Supabase environment variables not configured')
+    return NextResponse.next()
+  }
+
+  const { supabase, response } = createMiddlewareClient(request)
 
   // Refresh session and get user
   const { data: { user }, error } = await supabase.auth.getUser()
 
-  // Check if the route is a protected admin route (but not the login page)
-  const isProtectedRoute = protectedRoutes.some(
-    route => pathname.startsWith(route) && !authRoutes.includes(pathname)
-  )
-  
   // Check if the route is an auth route (login page)
   const isAuthRoute = authRoutes.includes(pathname)
+  
+  // Check if the route is a protected admin route (but not the login page)
+  const isProtectedRoute = pathname.startsWith('/admin') && !isAuthRoute
 
   // Redirect unauthenticated users to login
   if (isProtectedRoute && (!user || error)) {
@@ -48,15 +52,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder files
-     * - api routes (handled separately)
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-  ],
+  // Only run middleware on /admin routes
+  matcher: ['/admin/:path*'],
 }
