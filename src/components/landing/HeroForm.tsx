@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { 
@@ -9,46 +10,111 @@ import {
 } from "@/lib/validation/formSchema";
 import { trackFormSubmit } from "@/lib/tracking/events";
 import { heroContent } from "@/content/plasticSurgeryWebDesign";
+import { handlePhoneInput } from "@/lib/utils/phoneFormatter";
 
 interface HeroFormProps {
   formLocation?: "hero" | "final_cta";
   className?: string;
 }
 
+type FormState = "idle" | "submitting" | "success" | "error";
+
 export default function HeroForm({ 
   formLocation = "hero",
   className = "" 
 }: HeroFormProps) {
+  const [formState, setFormState] = useState<FormState>("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    watch,
+    setValue,
   } = useForm<LeadFormData>({
     resolver: zodResolver(leadFormSchema),
+    mode: "onBlur", // Validate on blur for better UX
   });
 
+  // Watch phone field for formatting
+  const phoneValue = watch("phone");
+
   const onSubmit = async (data: LeadFormData) => {
+    setFormState("submitting");
+    setErrorMessage("");
+    
     try {
       // Track the form submission
       trackFormSubmit(formLocation, data.practiceName);
       
-      // TODO: Replace with actual form submission endpoint
-      console.log("Form submitted:", data);
-      
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      // Reset form on success
+      // Submit to API
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || "Failed to submit form");
+      }
+
+      // Success - reset form and show success state
+      setFormState("success");
       reset();
       
-      // Show success message (could be improved with toast notification)
-      alert("Thank you! We'll be in touch within 1 business day.");
+      // Reset success state after 5 seconds
+      setTimeout(() => {
+        setFormState("idle");
+      }, 5000);
     } catch (error) {
       console.error("Form submission error:", error);
-      alert("Something went wrong. Please try again or call us directly.");
+      setFormState("error");
+      setErrorMessage(
+        error instanceof Error 
+          ? error.message 
+          : "Something went wrong. Please try again or call us directly."
+      );
     }
   };
+
+  // Handle phone input formatting
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = handlePhoneInput(e.target.value);
+    setValue("phone", formatted, { shouldValidate: false });
+  };
+
+  // Show success state
+  if (formState === "success") {
+    return (
+      <div className={`relative bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/20 border border-white/50 p-5 md:p-7 ${className}`}>
+        <div className="flex flex-col items-center justify-center py-8 text-center">
+          <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-xl md:text-2xl font-serif italic text-secondary-800 mb-2">
+            Thank You!
+          </h3>
+          <p className="text-sm text-secondary-600 mb-4">
+            We've received your request and will be in touch within 1 business day.
+          </p>
+          <button
+            onClick={() => setFormState("idle")}
+            className="text-sm text-primary-600 hover:text-primary-700 font-medium underline"
+          >
+            Submit another request
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`relative bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/20 border border-white/50 p-5 md:p-7 ${className}`}>
@@ -72,7 +138,34 @@ export default function HeroForm({
         <div className="w-12 h-0.5 mx-auto mt-4 rounded-full bg-gradient-to-r from-primary-400 to-primary-500" />
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+      {/* Error Message */}
+      {formState === "error" && errorMessage && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+          <div className="flex items-start gap-2">
+            <svg className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div className="flex-1">
+              <p className="text-sm font-medium text-red-800">Submission Failed</p>
+              <p className="text-xs text-red-700 mt-1">{errorMessage}</p>
+            </div>
+            <button
+              onClick={() => {
+                setFormState("idle");
+                setErrorMessage("");
+              }}
+              className="text-red-600 hover:text-red-800"
+              aria-label="Dismiss error"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3" noValidate>
         {/* Name Field */}
         <div className="group">
           <label htmlFor="name" className="block text-xs font-semibold text-secondary-700 mb-1">
@@ -161,13 +254,26 @@ export default function HeroForm({
               id="phone"
               type="tel"
               placeholder="(555) 123-4567"
+              value={phoneValue || ""}
+              onChange={handlePhoneChange}
+              onBlur={(e) => {
+                register("phone").onBlur(e);
+                // Trigger validation after formatting
+                setValue("phone", e.target.value, { shouldValidate: true });
+              }}
               className={`w-full px-3.5 py-2.5 bg-white border rounded-lg text-sm text-secondary-900 placeholder:text-secondary-300 placeholder:font-light focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 ${
                 errors.phone 
                   ? "border-red-300 focus:border-red-500" 
                   : "border-secondary-200 focus:border-primary-500"
               }`}
-              {...register("phone")}
             />
+            {errors.phone && (
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            )}
           </div>
           {errors.phone && (
             <p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>
@@ -221,10 +327,10 @@ export default function HeroForm({
         {/* Submit Button */}
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || formState === "submitting"}
           className="w-full mt-1 py-3 px-6 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-semibold rounded-lg hover:from-primary-700 hover:to-primary-800 hover:shadow-lg hover:shadow-primary-600/30 hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
-          {isSubmitting ? (
+          {(isSubmitting || formState === "submitting") ? (
             <span className="flex items-center justify-center">
               <svg
                 className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
@@ -259,10 +365,17 @@ export default function HeroForm({
         </button>
       </form>
 
-      {/* Privacy Notice */}
-      <p className="mt-4 text-[10px] text-secondary-400 leading-relaxed text-center">
-        {heroContent.formPrivacyNotice}
-      </p>
+      {/* HIPAA Privacy Notice - Prominently displayed */}
+      <div className="mt-4 p-3 bg-secondary-50 border border-secondary-200 rounded-lg">
+        <div className="flex items-start gap-2">
+          <svg className="w-4 h-4 text-secondary-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <p className="text-[10px] text-secondary-600 leading-relaxed">
+            <span className="font-semibold">HIPAA Notice:</span> {heroContent.formPrivacyNotice}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

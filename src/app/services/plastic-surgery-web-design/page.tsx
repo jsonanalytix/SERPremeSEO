@@ -276,86 +276,107 @@ export default function PlasticSurgeryWebDesignPage() {
           </div>
         </section>
 
-        {/* Pain Points Q&A Section - Stacked Card Grid */}
-        <section className="relative py-20 md:py-32 bg-white overflow-hidden">
-          {/* Decorative Background Elements */}
+        {/* Pain Points Q&A Section - Vertical Timeline Narrative Style */}
+        <section className="relative py-20 md:py-32 overflow-hidden bg-gradient-to-b from-secondary-900 via-secondary-800 to-secondary-900">
+          {/* Dark Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div 
+              className="w-full h-full"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              }}
+            />
+          </div>
+
+          {/* Gradient Overlays */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary-50/50 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-tr from-secondary-50 to-transparent" />
+            <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-primary-600/20 to-transparent" />
+            <div className="absolute bottom-0 right-0 w-full h-1/3 bg-gradient-to-t from-primary-500/20 to-transparent" />
           </div>
 
           <div className="section-container relative z-10">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <span className="inline-block px-4 py-2 bg-primary-100 text-primary-700 text-sm font-medium rounded-full mb-6">
+            {/* Section Header - Light on Dark */}
+            <div className="text-center mb-16 md:mb-20">
+              <span className="inline-block px-5 py-2 bg-primary-500/20 text-primary-300 text-sm font-semibold rounded-full mb-6 tracking-wide backdrop-blur-sm border border-primary-500/30">
                 We Get It
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-secondary-800 mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-white mb-6 leading-tight">
                 {painPointsContent.headline}
               </h2>
-              <p className="text-lg md:text-xl text-secondary-500 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-secondary-300 max-w-2xl mx-auto leading-relaxed">
                 These frustrations are more common than you think. Here&apos;s how we solve each one.
               </p>
             </div>
 
-            {/* Pain Points Grid - Stacked Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {painPointsContent.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="group relative bg-white rounded-2xl shadow-lg shadow-secondary-200/50 hover:shadow-xl hover:shadow-primary-200/30 transition-all duration-500 overflow-hidden border border-secondary-100"
-                >
-                  {/* Pain Point (Top) */}
-                  <div className="p-6 pb-4 bg-gradient-to-br from-secondary-50 to-white border-b border-secondary-100">
-                    <div className="flex items-start gap-3">
-                      {/* Quote Icon */}
-                      <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-secondary-200/50 text-secondary-400 flex items-center justify-center">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                        </svg>
+            {/* Vertical Timeline Layout - Completely Different from Comparison */}
+            <div className="max-w-4xl mx-auto">
+              <div className="relative">
+                {/* Vertical Timeline Line */}
+                <div className="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 via-primary-400 to-primary-500 rounded-full" />
+                
+                {/* Timeline Items */}
+                <div className="space-y-12 md:space-y-16">
+                  {painPointsContent.items.map((item, index) => (
+                    <div key={index} className="relative flex items-start gap-6 md:gap-8">
+                      {/* Timeline Number Badge */}
+                      <div className="flex-shrink-0 relative z-10">
+                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-xl border-4 border-secondary-800">
+                          <span className="text-2xl md:text-3xl font-bold text-white">
+                            {index + 1}
+                          </span>
+                        </div>
+                        {/* Connecting Line from Number */}
+                        <div className="hidden md:block absolute left-1/2 top-full w-0.5 h-12 bg-gradient-to-b from-primary-400 to-transparent -translate-x-1/2" />
                       </div>
-                      <p className="text-base md:text-lg font-serif italic text-secondary-700 leading-relaxed flex-1">
-                        {item.pain}
-                      </p>
-                    </div>
-                  </div>
 
-                  {/* Arrow Divider */}
-                  <div className="flex justify-center -my-3 relative z-10">
-                    <div className="w-6 h-6 rounded-full bg-primary-600 flex items-center justify-center shadow-md">
-                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                      </svg>
-                    </div>
-                  </div>
+                      {/* Content Card - Dark Theme */}
+                      <div className="flex-1 pt-2">
+                        <div className="bg-secondary-800/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-secondary-700/50 hover:border-primary-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/20">
+                          {/* Problem Statement */}
+                          <div className="mb-6 pb-6 border-b border-secondary-700/50">
+                            <div className="flex items-start gap-4 mb-3">
+                              <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-secondary-700/50 flex items-center justify-center">
+                                <svg className="w-5 h-5 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                </svg>
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-xl md:text-2xl font-semibold text-white leading-snug">
+                                  {item.pain}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
 
-                  {/* Solution (Bottom) */}
-                  <div className="p-6 pt-4">
-                    <div className="flex items-start gap-3">
-                      {/* Check Icon */}
-                      <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary-100 text-primary-600 flex items-center justify-center">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                        </svg>
+                          {/* Solution Statement */}
+                          <div className="flex items-start gap-4">
+                            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-500/20 flex items-center justify-center">
+                              <svg className="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-base md:text-lg text-secondary-200 leading-relaxed">
+                                {item.response}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <p className="text-sm md:text-base text-secondary-600 leading-relaxed flex-1">
-                        {item.response}
-                      </p>
                     </div>
-                  </div>
-
-                  {/* Hover Accent */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 to-primary-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
 
-            {/* Bottom CTA */}
-            <div className="mt-16 text-center">
-              <p className="text-secondary-500 mb-6 text-lg">Ready to solve these problems?</p>
+            {/* Bottom CTA - Light Button on Dark Background */}
+            <div className="mt-20 text-center">
+              <p className="text-lg md:text-xl text-secondary-300 mb-8 font-medium">
+                Ready to solve these problems?
+              </p>
               <a
                 href="#hero-form"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-primary-600 text-white font-semibold rounded-full hover:bg-primary-700 hover:scale-105 transition-all duration-300 shadow-lg shadow-primary-600/30"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-white text-secondary-900 font-semibold rounded-full hover:bg-primary-50 hover:scale-105 transition-all duration-300 shadow-xl shadow-black/30 hover:shadow-2xl hover:shadow-black/40"
               >
                 Let&apos;s Talk Solutions
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -366,21 +387,99 @@ export default function PlasticSurgeryWebDesignPage() {
           </div>
         </section>
 
-        {/* Metrics Band */}
-        <section className="py-12 md:py-16 bg-primary-600">
-          <div className="section-container">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              {metricsContent.metrics.map((metric, index) => (
-                <div key={index}>
-                  <div className="text-4xl md:text-5xl font-bold text-white mb-2">
-                    {metric.value}
-                  </div>
-                  <p className="text-primary-100 text-sm md:text-base">
-                    {metric.label}
-                  </p>
-                </div>
-              ))}
+        {/* Metrics Band - Enhanced Design */}
+        <section className="relative py-20 md:py-28 overflow-hidden">
+          {/* Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800" />
+          
+          {/* Decorative Pattern Overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <div 
+              className="w-full h-full"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              }}
+            />
+          </div>
+
+          {/* Animated Gradient Orbs */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary-300/10 rounded-full blur-2xl" />
+          </div>
+
+          {/* Top Accent Border */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+
+          <div className="section-container relative z-10">
+            {/* Section Header */}
+            <div className="text-center mb-12 md:mb-16">
+              <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm text-white text-sm font-semibold rounded-full mb-6 tracking-wide border border-white/20">
+                Proven Results
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mb-4">
+                {metricsContent.headline}
+              </h2>
             </div>
+
+            {/* Enhanced Metrics Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+              {metricsContent.metrics.map((metric, index) => {
+                // Icons for each metric type
+                const icons = [
+                  // Form fills and phone calls
+                  <svg key="form" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>,
+                  // Google Business Profile calls
+                  <svg key="phone" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>,
+                  // Website visits
+                  <svg key="visits" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>,
+                ];
+
+                return (
+                  <div
+                    key={index}
+                    className="group relative bg-white/10 backdrop-blur-md rounded-2xl p-8 md:p-10 border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary-900/50"
+                  >
+                    {/* Glow Effect on Hover */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-400/0 to-primary-600/0 group-hover:from-primary-400/20 group-hover:to-primary-600/20 transition-all duration-500 -z-10 blur-xl" />
+                    
+                    {/* Icon Container */}
+                    <div className="flex justify-center mb-6">
+                      <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:bg-white/30 group-hover:scale-110 transition-all duration-300 shadow-lg">
+                        {icons[index]}
+                      </div>
+                    </div>
+
+                    {/* Metric Value */}
+                    <div className="text-center mb-4">
+                      <div className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">
+                        {metric.value}
+                      </div>
+                      <div className="h-1 w-16 bg-gradient-to-r from-transparent via-white/50 to-transparent mx-auto rounded-full" />
+                    </div>
+
+                    {/* Metric Label */}
+                    <p className="text-center text-white/90 text-sm md:text-base leading-relaxed font-medium group-hover:text-white transition-colors duration-300">
+                      {metric.label}
+                    </p>
+
+                    {/* Corner Accent */}
+                    <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-white/40 group-hover:bg-white/60 transition-colors duration-300" />
+                    <div className="absolute bottom-4 left-4 w-1.5 h-1.5 rounded-full bg-white/30 group-hover:bg-white/50 transition-colors duration-300" />
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Bottom Accent Border */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
           </div>
         </section>
 
