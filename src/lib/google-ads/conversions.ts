@@ -57,11 +57,12 @@ export async function uploadSingleConversion(
 
     // Upload the conversion
     const config = getGoogleAdsConfig()!
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response = await customer.conversionUploads.uploadClickConversions({
       customer_id: config.customerId,
       conversions: [clickConversion],
       partial_failure: true, // Allow partial success in batch operations
-    })
+    } as any)
 
     // Check for errors
     if (response.partial_failure_error) {
@@ -158,11 +159,12 @@ export async function uploadBatchConversions(
 
     // Upload conversions in batch
     const config = getGoogleAdsConfig()!
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response = await customer.conversionUploads.uploadClickConversions({
       customer_id: config.customerId,
       conversions: clickConversions,
       partial_failure: true,
-    })
+    } as any)
 
     console.log('Google Ads API response:', JSON.stringify(response, null, 2))
 

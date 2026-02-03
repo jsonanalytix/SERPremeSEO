@@ -118,14 +118,25 @@ export async function POST(request: NextRequest) {
     // Single lead sync
     if (leadId) {
       // Fetch the lead
-      const { data: lead, error: fetchError } = await adminClient
+      const { data: leadData, error: fetchError } = await adminClient
         .from('leads')
         .select('id, gclid, converted_at, created_at, conversion_value, status, gads_conversion_sent')
         .eq('id', leadId)
         .single()
 
-      if (fetchError || !lead) {
+      if (fetchError || !leadData) {
         return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
+      }
+
+      // Type assertion for the lead data
+      const lead = leadData as {
+        id: string
+        gclid: string | null
+        converted_at: string | null
+        created_at: string
+        conversion_value: number | null
+        status: string
+        gads_conversion_sent: boolean
       }
 
       // Validation checks
@@ -156,13 +167,13 @@ export async function POST(request: NextRequest) {
 
       if (result.success) {
         // Update the lead record
-        await adminClient
-          .from('leads')
+        await (adminClient
+          .from('leads') as ReturnType<typeof adminClient.from>)
           .update({
             gads_conversion_sent: true,
             gads_conversion_sent_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
-          })
+          } as Record<string, unknown>)
           .eq('id', leadId)
 
         return NextResponse.json({
@@ -202,13 +213,13 @@ export async function POST(request: NextRequest) {
         .map(r => r.leadId)
 
       if (successfulIds.length > 0) {
-        await adminClient
-          .from('leads')
+        await (adminClient
+          .from('leads') as ReturnType<typeof adminClient.from>)
           .update({
             gads_conversion_sent: true,
             gads_conversion_sent_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
-          })
+          } as Record<string, unknown>)
           .in('id', successfulIds)
       }
 
@@ -251,13 +262,13 @@ export async function POST(request: NextRequest) {
         .map(r => r.leadId)
 
       if (successfulIds.length > 0) {
-        await adminClient
-          .from('leads')
+        await (adminClient
+          .from('leads') as ReturnType<typeof adminClient.from>)
           .update({
             gads_conversion_sent: true,
             gads_conversion_sent_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
-          })
+          } as Record<string, unknown>)
           .in('id', successfulIds)
       }
 

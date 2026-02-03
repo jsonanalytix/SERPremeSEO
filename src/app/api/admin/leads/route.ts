@@ -95,7 +95,7 @@ export async function GET(request: NextRequest) {
     .not('utm_source', 'is', null)
     .order('utm_source')
 
-  const distinctUtmSources = [...new Set(utmSources?.map(l => l.utm_source).filter(Boolean))]
+  const distinctUtmSources = [...new Set(utmSources?.map((l: { utm_source: string }) => l.utm_source).filter(Boolean) || [])]
 
   return NextResponse.json({
     leads: leads || [],

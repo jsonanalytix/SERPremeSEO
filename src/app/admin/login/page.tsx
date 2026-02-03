@@ -5,15 +5,16 @@
  * Uses Supabase Auth for authentication.
  * 
  * @created 2026-02-03 - Admin CRM authentication
+ * @updated 2026-02-03 - Added Suspense boundary for useSearchParams
  */
 
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
-export default function AdminLoginPage() {
+function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get('redirect') || '/admin/leads'
@@ -45,7 +46,7 @@ export default function AdminLoginPage() {
       // Successful login - redirect to intended page
       router.push(redirectTo)
       router.refresh()
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred. Please try again.')
       setLoading(false)
     }
@@ -166,5 +167,17 @@ export default function AdminLoginPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary-100 to-secondary-200">
+        <div className="animate-spin h-8 w-8 border-4 border-primary-600 border-t-transparent rounded-full" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }

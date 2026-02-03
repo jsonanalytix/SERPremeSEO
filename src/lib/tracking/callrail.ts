@@ -1,5 +1,12 @@
 // CallRail Dynamic Number Insertion Integration
 
+// Extend Window interface for CallRail
+declare global {
+  interface Window {
+    cr?: unknown;
+  }
+}
+
 /**
  * CallRail configuration
  * 
