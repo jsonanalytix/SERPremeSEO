@@ -340,7 +340,8 @@ export default function HeroForm({
         <button
           type="submit"
           disabled={isSubmitting || formState === "submitting"}
-          className="w-full mt-1 py-3 px-6 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-semibold rounded-lg hover:from-primary-700 hover:to-primary-800 hover:shadow-lg hover:shadow-primary-600/30 hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="w-full mt-1 py-3 px-6 text-white text-sm font-semibold rounded-lg hover:brightness-90 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          style={{ backgroundColor: '#DFA17E' }}
         >
           {(isSubmitting || formState === "submitting") ? (
             <span className="flex items-center justify-center">

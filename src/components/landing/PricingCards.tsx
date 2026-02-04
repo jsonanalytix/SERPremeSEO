@@ -173,7 +173,8 @@ export default function PricingCards({ onSelectPackage }: PricingCardsProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#hero-form"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-white text-secondary-900 font-semibold rounded-full hover:bg-primary-50 hover:scale-105 transition-all duration-300 shadow-lg shadow-black/20"
+              className="inline-flex items-center gap-3 px-8 py-4 text-white font-semibold rounded-full hover:brightness-90 hover:scale-105 transition-all duration-300 shadow-lg shadow-black/20"
+              style={{ backgroundColor: '#DFA17E' }}
             >
               Get A Custom Quote
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

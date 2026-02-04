@@ -90,7 +90,7 @@ export default function StickyHeader({ onGetQuoteClick }: StickyHeaderProps) {
               </svg>
               Call Now: {siteConfig.phoneNumber}
             </a>
-            <button onClick={handleGetQuoteClick} className="btn-primary">
+            <button onClick={handleGetQuoteClick} className="btn-quote">
               Get Quote
             </button>
           </div>
@@ -119,7 +119,7 @@ export default function StickyHeader({ onGetQuoteClick }: StickyHeaderProps) {
             </a>
             <button
               onClick={handleGetQuoteClick}
-              className="btn-primary text-sm px-4 py-2"
+              className="btn-quote text-sm px-4 py-2"
             >
               Get Quote
             </button>

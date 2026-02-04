@@ -77,7 +77,8 @@ export default function MobileStickyBar({ onGetQuoteClick }: MobileStickyBarProp
         {/* Get Quote Button */}
         <button
           onClick={handleGetQuoteClick}
-          className="flex-1 flex items-center justify-center gap-2 bg-primary-600 text-white font-semibold text-base hover:bg-primary-700 transition-colors"
+          className="flex-1 flex items-center justify-center gap-2 text-white font-semibold text-base transition-all hover:brightness-90"
+          style={{ backgroundColor: '#DFA17E' }}
         >
           <svg
             className="w-5 h-5"

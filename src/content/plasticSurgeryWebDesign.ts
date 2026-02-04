@@ -49,7 +49,7 @@ export const checklistContent = {
     { icon: "smartphone", label: "Mobile-first", description: "Beautiful on every device" },
     { icon: "shield", label: "Privacy-conscious", description: "HIPAA-aligned infrastructure" },
     { icon: "compass", label: "Easy to navigate", description: "Clear paths to every procedure" },
-    { icon: "accessibility", label: "ADA updated & maintained", description: "Compliant and accessible" },
+    { icon: "accessibility", label: "ADA updated & maintained", description: "Accessible and disability-friendly" },
     { icon: "search", label: "Optimized for search engines", description: "Built for visibility" },
     { icon: "users", label: "Built around real patient journeys", description: "Conversion-focused UX" },
   ],
