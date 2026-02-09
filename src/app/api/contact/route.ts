@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { leadFormSchema } from "@/lib/validation/formSchema";
 import { createAdminClient } from "@/lib/supabase/server";
+import { sendLeadEmails } from "@/lib/email";
 import type { LeadInsert } from "@/lib/supabase/types";
 
 /**
  * POST /api/contact
  * Handles form submissions from the lead capture form
  * Stores leads in Supabase with full attribution tracking
+ * Sends email notifications to client and confirmation to lead
  * 
  * @updated 2026-02-03 - Added Supabase integration and attribution capture
+ * @updated 2026-02-04 - Added email notifications (client + lead confirmation)
  */
 export async function POST(request: NextRequest) {
   try {
@@ -97,6 +100,35 @@ export async function POST(request: NextRequest) {
       source: attribution.utm_source,
       hasGclid: !!attribution.gclid,
       timestamp: new Date().toISOString(),
+    });
+    
+    // Send email notifications (client notification + lead confirmation)
+    // Run in background - don't block the response
+    const emailData = {
+      name: formData.name,
+      practiceName: formData.practiceName,
+      email: formData.email,
+      phone: formData.phone,
+      website: formData.website || null,
+      projectType: formData.projectType || null,
+      leadId: lead.id,
+      submittedAt: new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        dateStyle: "full",
+        timeStyle: "short",
+      }),
+    };
+    
+    // Send emails without blocking the response
+    sendLeadEmails(emailData).then((results) => {
+      if (!results.clientNotification.success) {
+        console.error("Failed to send client notification:", results.clientNotification.error);
+      }
+      if (!results.leadConfirmation.success) {
+        console.error("Failed to send lead confirmation:", results.leadConfirmation.error);
+      }
+    }).catch((err) => {
+      console.error("Email sending error:", err);
     });
     
     // Return success response
