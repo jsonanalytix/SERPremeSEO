@@ -171,11 +171,15 @@ SERPreme SEO Lead Notification System
   return { subject, html, text };
 }
 
+// Quiz link for lead confirmation email
+const QUIZ_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSc6K_AJgbrogpTO20939049l96Vr65eKrWi_UcX8KPsZwatnw/viewform";
+
 /**
  * Lead confirmation email - sent to the person who submitted the form
+ * @updated 2026-02-11 - Updated copy per client (Kirsten)
  */
 export function getLeadConfirmationEmail(lead: LeadEmailData): EmailContent {
-  const subject = `Thanks for reaching out, ${lead.name.split(" ")[0]}! We've received your inquiry`;
+  const subject = "Thanks for Reaching Out! We've Got Your Message 💬";
 
   const html = `
 <!DOCTYPE html>
@@ -183,7 +187,7 @@ export function getLeadConfirmationEmail(lead: LeadEmailData): EmailContent {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You for Your Inquiry</title>
+  <title>Thanks for Reaching Out!</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f4f4f5;">
   <table role="presentation" style="width: 100%; border-collapse: collapse;">
@@ -194,10 +198,10 @@ export function getLeadConfirmationEmail(lead: LeadEmailData): EmailContent {
           <tr>
             <td style="background: linear-gradient(135deg, #0d3b66 0%, #1a5a96 100%); padding: 40px; text-align: center;">
               <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">
-                Thank You!
+                Thanks for Reaching Out!
               </h1>
               <p style="margin: 12px 0 0; color: rgba(255, 255, 255, 0.9); font-size: 16px;">
-                We've received your inquiry and will be in touch soon.
+                We've got your message 💬
               </p>
             </td>
           </tr>
@@ -206,65 +210,31 @@ export function getLeadConfirmationEmail(lead: LeadEmailData): EmailContent {
           <tr>
             <td style="padding: 40px;">
               <p style="margin: 0 0 20px; color: #3f3f46; font-size: 16px; line-height: 1.6;">
-                Hi ${lead.name.split(" ")[0]},
+                Hi there,
               </p>
               
               <p style="margin: 0 0 20px; color: #3f3f46; font-size: 16px; line-height: 1.6;">
-                Thank you for your interest in partnering with SERPreme SEO for your practice's web presence. We're excited to learn more about <strong>${lead.practiceName}</strong> and how we can help you attract more patients with a beautiful, high-performing website.
+                Thanks so much for reaching out! I've received your message and will get back to you within 48 business hours.
               </p>
-              
-              <div style="background-color: #f0fdfa; border-left: 4px solid #0891b2; padding: 20px; margin: 24px 0; border-radius: 0 8px 8px 0;">
-                <h3 style="margin: 0 0 8px; color: #0d3b66; font-size: 16px; font-weight: 600;">
-                  What happens next?
-                </h3>
-                <ul style="margin: 0; padding-left: 20px; color: #3f3f46; font-size: 14px; line-height: 1.8;">
-                  <li>Our team will review your inquiry within 1 business day</li>
-                  <li>We'll reach out to schedule a free consultation call</li>
-                  <li>We'll discuss your goals and create a customized proposal</li>
-                </ul>
-              </div>
               
               <p style="margin: 0 0 20px; color: #3f3f46; font-size: 16px; line-height: 1.6;">
-                In the meantime, if you have any questions, feel free to reply to this email or give us a call.
+                In the meantime, I'd love to learn a little more about your business so I can give you the most helpful response possible. If you have a moment, please fill out this quick quiz here: <a href="${QUIZ_LINK}" style="color: #0891b2; font-weight: 500; text-decoration: underline;">Quiz Link</a>
               </p>
               
-              <!-- Summary Box -->
-              <div style="background-color: #fafafa; border: 1px solid #e4e4e7; border-radius: 8px; padding: 20px; margin-top: 24px;">
-                <h4 style="margin: 0 0 12px; color: #0d3b66; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
-                  Your Submission Summary
-                </h4>
-                <table role="presentation" style="width: 100%; font-size: 14px;">
-                  <tr>
-                    <td style="padding: 4px 0; color: #71717a;">Practice:</td>
-                    <td style="padding: 4px 0; color: #18181b; font-weight: 500;">${lead.practiceName}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 4px 0; color: #71717a;">Email:</td>
-                    <td style="padding: 4px 0; color: #18181b;">${lead.email}</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 4px 0; color: #71717a;">Phone:</td>
-                    <td style="padding: 4px 0; color: #18181b;">${lead.phone}</td>
-                  </tr>
-                  ${lead.projectType ? `
-                  <tr>
-                    <td style="padding: 4px 0; color: #71717a;">Interest:</td>
-                    <td style="padding: 4px 0; color: #18181b;">${formatProjectType(lead.projectType)}</td>
-                  </tr>
-                  ` : ""}
-                </table>
-              </div>
-            </td>
-          </tr>
-          
-          <!-- Signature -->
-          <tr>
-            <td style="padding: 0 40px 40px;">
+              <p style="margin: 0 0 20px; color: #3f3f46; font-size: 16px; line-height: 1.6;">
+                It only takes a few minutes and helps me better understand your goals, challenges, and what you're looking to achieve.
+              </p>
+              
+              <p style="margin: 0 0 20px; color: #3f3f46; font-size: 16px; line-height: 1.6;">
+                Looking forward to connecting with you soon!
+              </p>
+              
+              <!-- Signature -->
               <p style="margin: 0; color: #3f3f46; font-size: 16px; line-height: 1.6;">
-                Looking forward to speaking with you,
+                Warmly,
               </p>
               <p style="margin: 8px 0 0; color: #0d3b66; font-size: 16px; font-weight: 600;">
-                The SERPreme SEO Team
+                Kirsten
               </p>
             </td>
           </tr>
@@ -294,25 +264,20 @@ export function getLeadConfirmationEmail(lead: LeadEmailData): EmailContent {
   `.trim();
 
   const text = `
-Hi ${lead.name.split(" ")[0]},
+Hi there,
 
-Thank you for your interest in partnering with SERPreme SEO for your practice's web presence. We're excited to learn more about ${lead.practiceName} and how we can help you attract more patients with a beautiful, high-performing website.
+Thanks so much for reaching out! I've received your message and will get back to you within 48 business hours.
 
-WHAT HAPPENS NEXT?
-- Our team will review your inquiry within 1 business day
-- We'll reach out to schedule a free consultation call
-- We'll discuss your goals and create a customized proposal
+In the meantime, I'd love to learn a little more about your business so I can give you the most helpful response possible. If you have a moment, please fill out this quick quiz here:
 
-In the meantime, if you have any questions, feel free to reply to this email or give us a call.
+${QUIZ_LINK}
 
-YOUR SUBMISSION SUMMARY
-Practice: ${lead.practiceName}
-Email: ${lead.email}
-Phone: ${lead.phone}
-${lead.projectType ? `Interest: ${formatProjectType(lead.projectType)}` : ""}
+It only takes a few minutes and helps me better understand your goals, challenges, and what you're looking to achieve.
 
-Looking forward to speaking with you,
-The SERPreme SEO Team
+Looking forward to connecting with you soon!
+
+Warmly,
+Kirsten
 
 ---
 SERPreme SEO

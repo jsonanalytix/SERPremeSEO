@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
     });
     
     // Send email notifications (client notification + lead confirmation)
-    // Run in background - don't block the response
+    // Must await - Vercel serverless terminates immediately after response, so fire-and-forget fails
     const emailData = {
       name: formData.name,
       practiceName: formData.practiceName,
@@ -118,18 +118,18 @@ export async function POST(request: NextRequest) {
         timeStyle: "short",
       }),
     };
-    
-    // Send emails without blocking the response
-    sendLeadEmails(emailData).then((results) => {
-      if (!results.clientNotification.success) {
-        console.error("Failed to send client notification:", results.clientNotification.error);
-      }
-      if (!results.leadConfirmation.success) {
-        console.error("Failed to send lead confirmation:", results.leadConfirmation.error);
-      }
-    }).catch((err) => {
-      console.error("Email sending error:", err);
-    });
+
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not set - emails will not be sent. Add it to Vercel environment variables.");
+    }
+
+    const emailResults = await sendLeadEmails(emailData);
+    if (!emailResults.clientNotification.success) {
+      console.error("Failed to send client notification:", emailResults.clientNotification.error);
+    }
+    if (!emailResults.leadConfirmation.success) {
+      console.error("Failed to send lead confirmation:", emailResults.leadConfirmation.error);
+    }
     
     // Return success response
     return NextResponse.json(
