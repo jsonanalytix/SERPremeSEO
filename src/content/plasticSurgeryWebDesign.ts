@@ -17,6 +17,42 @@ export const heroContent = {
   formPrivacyNotice: "Practice inquiries only. Please do not submit patient names, photos, medical details, or any protected health information (PHI) through this form.",
 };
 
+// Portfolio page - templates to showcase
+export const portfolioContent = {
+  headline: "Website Design Portfolio",
+  subheadline: "Explore our curated templates built for plastic surgery and medical aesthetics. Every project is designed with conversion and patient trust in mind.",
+  templates: [
+    {
+      name: "Veriti Demo",
+      tagline: "Plastics & Dermatology Template",
+      description: "Built for plastic surgeons and dermatologists. Clean galleries, procedure-focused layout, and conversion-optimized consultation paths.",
+      url: "https://veritiwellness.com/",
+      image: "/portfolio/veriti-medical-website-template.png",
+    },
+    {
+      name: "Elite Demo",
+      tagline: "Medical Spa Template",
+      description: "Plug-and-play design for med spas. Showcase treatments, pricing, and before/after results with a premium feel.",
+      url: "https://veritiwellness.com/",
+      image: "/portfolio/elite-medical-website-template.png",
+    },
+    {
+      name: "Lumea Demo",
+      tagline: "Medical Bath Haus Template",
+      description: "Elegant, spa-inspired layout for aesthetic practices. Emphasizes ambiance and premium patient experience.",
+      url: "https://lumeamed.com/",
+      image: "/portfolio/lumea-medical-website-template.png",
+    },
+    {
+      name: "Dental Demo",
+      tagline: "Template for Dentists",
+      description: "Professional dental practice template. Clear service pages, patient-friendly navigation, and conversion-focused design.",
+      url: "https://geteliteskin.com/",
+      image: "/portfolio/maine-dental-medical-website-template.png",
+    },
+  ],
+};
+
 export const problemSolutionContent = {
   headline: "Plastic surgery website design built to elevate patient trust",
   subheadline: "And turn site visitors into booked consults.",
