@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { featuresContent } from "@/content/plasticSurgeryWebDesign";
+import { featuresContent as defaultFeaturesContent } from "@/content/plasticSurgeryWebDesign";
 
 // Feature icon component
 const FeatureIcon = ({ type }: { type: string }) => {
@@ -92,9 +92,13 @@ const FeatureIcon = ({ type }: { type: string }) => {
   );
 };
 
-export default function FeatureSection() {
+interface FeatureSectionProps {
+  content?: typeof defaultFeaturesContent;
+}
+
+export default function FeatureSection({ content = defaultFeaturesContent }: FeatureSectionProps) {
   const [activeFeature, setActiveFeature] = useState<string>(
-    featuresContent.features[0]?.id || ""
+    content.features[0]?.id || ""
   );
   const [isNavSticky, setIsNavSticky] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
@@ -145,7 +149,7 @@ export default function FeatureSection() {
       setIsNavSticky(shouldBeSticky);
 
       // Update active feature based on scroll position
-      const featureElements = featuresContent.features.map((f) =>
+      const featureElements = content.features.map((f) =>
         document.getElementById(`feature-${f.id}`)
       );
 
@@ -154,7 +158,7 @@ export default function FeatureSection() {
         if (el) {
           const rect = el.getBoundingClientRect();
           if (rect.top <= 200) {
-            setActiveFeature(featuresContent.features[i].id);
+            setActiveFeature(content.features[i].id);
             break;
           }
         }
@@ -163,7 +167,7 @@ export default function FeatureSection() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [content]);
 
   const scrollToFeature = (id: string) => {
     const element = document.getElementById(`feature-${id}`);
@@ -202,10 +206,10 @@ export default function FeatureSection() {
             Deep Dive
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-secondary-800 mb-6">
-            {featuresContent.headline}
+            {content.headline}
           </h2>
           <p className="text-lg md:text-xl text-secondary-500 max-w-2xl mx-auto">
-            {featuresContent.subheadline}
+            {content.subheadline}
           </p>
         </div>
 
@@ -223,7 +227,7 @@ export default function FeatureSection() {
               ref={navScrollRef}
               className="flex overflow-x-auto py-2 px-2 gap-1 scrollbar-hide"
             >
-              {featuresContent.features.map((feature) => (
+              {content.features.map((feature) => (
                 <button
                   key={feature.id}
                   ref={(el) => {
@@ -248,7 +252,7 @@ export default function FeatureSection() {
 
         {/* Feature Deep-Dives */}
         <div className="mt-16 space-y-20 md:space-y-32">
-          {featuresContent.features.map((feature, index) => (
+          {content.features.map((feature, index) => (
             <div
               key={feature.id}
               id={`feature-${feature.id}`}

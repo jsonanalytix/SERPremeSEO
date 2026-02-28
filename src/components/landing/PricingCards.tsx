@@ -1,13 +1,14 @@
 "use client";
 
 import { trackPackageClick } from "@/lib/tracking/events";
-import { pricingContent } from "@/content/plasticSurgeryWebDesign";
+import { pricingContent as defaultPricingContent } from "@/content/plasticSurgeryWebDesign";
 
 interface PricingCardsProps {
+  content?: typeof defaultPricingContent;
   onSelectPackage?: (tier: "starter" | "compete" | "conquer") => void;
 }
 
-export default function PricingCards({ onSelectPackage }: PricingCardsProps) {
+export default function PricingCards({ content = defaultPricingContent, onSelectPackage }: PricingCardsProps) {
   const handlePackageClick = (tier: "starter" | "compete" | "conquer") => {
     trackPackageClick(tier);
     
@@ -49,7 +50,7 @@ export default function PricingCards({ onSelectPackage }: PricingCardsProps) {
             Transparent Pricing
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-white mb-6">
-            {pricingContent.headline}
+            {content.headline}
           </h2>
           <p className="text-lg md:text-xl text-secondary-300 max-w-2xl mx-auto">
             Choose the perfect package for your practice&apos;s needs
@@ -58,7 +59,7 @@ export default function PricingCards({ onSelectPackage }: PricingCardsProps) {
 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-stretch">
-          {pricingContent.packages.map((pkg, index) => {
+          {content.packages.map((pkg, index) => {
             const isPopular = index === 1; // Middle card (Compete) is popular
             
             return (
@@ -199,9 +200,9 @@ export default function PricingCards({ onSelectPackage }: PricingCardsProps) {
         </div>
 
         {/* Included Note */}
-        {pricingContent.includedNote && (
+        {content.includedNote && (
           <p className="text-center text-sm text-secondary-400 mt-10 max-w-3xl mx-auto">
-            {pricingContent.includedNote}
+            {content.includedNote}
           </p>
         )}
       </div>

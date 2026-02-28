@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { trackFAQExpand } from "@/lib/tracking/events";
-import { faqContent } from "@/content/plasticSurgeryWebDesign";
+import { faqContent as defaultFaqContent } from "@/content/plasticSurgeryWebDesign";
 
 interface FAQItemProps {
   question: string;
@@ -79,7 +79,11 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   );
 }
 
-export default function FAQ() {
+interface FAQProps {
+  content?: typeof defaultFaqContent;
+}
+
+export default function FAQ({ content = defaultFaqContent }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const handleToggle = (index: number, question: string) => {
@@ -108,7 +112,7 @@ export default function FAQ() {
               Got Questions?
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-secondary-800 mb-6">
-              {faqContent.headline}
+              {content.headline}
             </h2>
             <p className="text-lg md:text-xl text-secondary-500 max-w-xl mx-auto">
               Everything you need to know about our web design services
@@ -117,7 +121,7 @@ export default function FAQ() {
 
           {/* FAQ Accordion */}
           <div className="space-y-4">
-            {faqContent.items.map((item, index) => (
+            {content.items.map((item, index) => (
               <FAQItem
                 key={index}
                 question={item.question}
@@ -151,7 +155,7 @@ export default function FAQ() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: faqContent.items.map((item) => ({
+            mainEntity: content.items.map((item) => ({
               "@type": "Question",
               name: item.question,
               acceptedAnswer: {

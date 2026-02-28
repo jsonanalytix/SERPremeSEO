@@ -9,20 +9,28 @@ import {
   projectTypeOptions 
 } from "@/lib/validation/formSchema";
 import { trackFormSubmit } from "@/lib/tracking/events";
-import { heroContent } from "@/content/plasticSurgeryWebDesign";
+import { heroContent as defaultHeroContent } from "@/content/plasticSurgeryWebDesign";
 import { handlePhoneInput } from "@/lib/utils/phoneFormatter";
 import { captureAttribution, getAttributionData } from "@/lib/utils/attributionCapture";
+
+export interface HeroFormContentProps {
+  formTitle: string;
+  formDisclaimer: string;
+  formPrivacyNotice: string;
+}
 
 interface HeroFormProps {
   formLocation?: "hero" | "final_cta";
   className?: string;
+  content?: HeroFormContentProps;
 }
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
 export default function HeroForm({ 
   formLocation = "hero",
-  className = "" 
+  className = "",
+  content = defaultHeroContent,
 }: HeroFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -136,7 +144,7 @@ export default function HeroForm({
       {/* Header */}
       <div className="mb-5 text-center">
         <h3 className="text-xl md:text-2xl lg:text-3xl font-serif italic text-secondary-800 mb-2">
-          {heroContent.formTitle}
+          {content.formTitle}
         </h3>
         <div className="flex items-center justify-center gap-2 text-xs text-secondary-500">
           <div className="flex items-center justify-center w-5 h-5 rounded-full bg-primary-100">
@@ -144,7 +152,7 @@ export default function HeroForm({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <span className="font-medium">{heroContent.formDisclaimer}</span>
+          <span className="font-medium">{content.formDisclaimer}</span>
         </div>
         {/* Decorative line */}
         <div className="w-12 h-0.5 mx-auto mt-4 rounded-full bg-gradient-to-r from-primary-400 to-primary-500" />
@@ -385,7 +393,7 @@ export default function HeroForm({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
           </svg>
           <p className="text-[10px] text-secondary-600 leading-relaxed">
-            <span className="font-semibold">HIPAA Notice:</span> {heroContent.formPrivacyNotice}
+            <span className="font-semibold">HIPAA Notice:</span> {content.formPrivacyNotice}
           </p>
         </div>
       </div>
