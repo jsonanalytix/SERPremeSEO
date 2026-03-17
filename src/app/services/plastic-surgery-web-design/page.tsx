@@ -8,6 +8,7 @@ import {
 } from "@/components/landing";
 import TrackedPhoneLink from "@/components/landing/TrackedPhoneLink";
 import {
+  heroContent,
   problemSolutionContent,
   checklistContent,
   painPointsContent,
@@ -134,7 +135,7 @@ export default function PlasticSurgeryWebDesignPage() {
 
       <main>
         {/* Hero Section */}
-        <HeroSection />
+        <HeroSection content={heroContent} portfolioHref="/services/plastic-surgery-web-design/portfolio" />
 
         {/* Problem/Solution Section */}
         <section className="py-16 md:py-24 bg-white">

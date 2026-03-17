@@ -5,8 +5,21 @@ import Link from "next/link";
 import HeroForm from "./HeroForm";
 import { heroContent as defaultHeroContent } from "@/content/healthcareWebDesign";
 
+interface HeroContent {
+  headline: string;
+  subheadline: string;
+  body: string;
+  ctaPrimary: string;
+  ctaSecondary?: string;
+  trustMarkers: { icon: string; label: string }[];
+  formTitle: string;
+  formDisclaimer: string;
+  formPrivacyNotice: string;
+  whoWeWorkWith?: string;
+}
+
 interface HeroSectionProps {
-  content?: typeof defaultHeroContent;
+  content?: HeroContent;
   portfolioHref?: string;
 }
 
