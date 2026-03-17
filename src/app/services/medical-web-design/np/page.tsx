@@ -1,7 +1,6 @@
-// A/B Test Variant: No Pricing Section
-// Testing whether removing visible pricing improves Google Ads lead conversion.
-// Original: /services/plastic-surgery-web-design
-// Variant:  /services/plastic-surgery-web-design/np
+// Ad-traffic variant: No Pricing Section
+// Landing page for Google Ads medical web design campaigns
+// All content sourced from healthcareWebDesign.ts (broad medical audience)
 
 import {
   HeroSection,
@@ -9,20 +8,25 @@ import {
   MobileStickyBar,
   FAQ,
   FeatureSection,
+  SpecialtiesGrid,
+  ProcessSection,
 } from "@/components/landing";
 import TrackedPhoneLink from "@/components/landing/TrackedPhoneLink";
 import {
   heroContent,
   problemSolutionContent,
+  specialtiesContent,
   checklistContent,
   painPointsContent,
+  processContent,
   metricsContent,
   comparisonContent,
-  featuresContent,
   finalCtaContent,
   faqContent,
+  featuresContent,
+  aboutContent,
   siteConfig,
-} from "@/content/plasticSurgeryWebDesign";
+} from "@/content/healthcareWebDesign";
 
 const faqContentNoPricing = {
   ...faqContent,
@@ -31,7 +35,6 @@ const faqContentNoPricing = {
   ),
 };
 
-// Icons for checklist section
 const ChecklistIcon = ({ type }: { type: string }) => {
   const icons: Record<string, JSX.Element> = {
     zap: (
@@ -104,7 +107,6 @@ const ChecklistIcon = ({ type }: { type: string }) => {
   );
 };
 
-// Icons for Problem/Solution feature cards
 const FeatureCardIcon = ({ type }: { type: string }) => {
   const icons: Record<string, JSX.Element> = {
     responsive: (
@@ -132,15 +134,15 @@ const FeatureCardIcon = ({ type }: { type: string }) => {
   return icons[type] || icons.responsive;
 };
 
-export default function PlasticSurgeryWebDesignNoPricingPage() {
+export default function MedicalWebDesignNoPricingPage() {
   return (
     <>
       <StickyHeader />
       <MobileStickyBar />
 
       <main>
-        {/* Hero Section */}
-        <HeroSection content={heroContent} portfolioHref="/services/plastic-surgery-web-design/portfolio" />
+        {/* Hero Section - healthcare content */}
+        <HeroSection content={heroContent} portfolioHref="/services/medical-web-design/portfolio" />
 
         {/* Problem/Solution Section */}
         <section className="py-16 md:py-24 bg-white">
@@ -187,6 +189,9 @@ export default function PlasticSurgeryWebDesignNoPricingPage() {
           </div>
         </section>
 
+        {/* Specialties We Serve */}
+        <SpecialtiesGrid content={specialtiesContent} />
+
         {/* Checklist Section */}
         <section className="relative py-20 md:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-secondary-900 via-secondary-800 to-primary-900" />
@@ -211,7 +216,7 @@ export default function PlasticSurgeryWebDesignNoPricingPage() {
                 {checklistContent.headline}
               </h2>
               <p className="text-lg md:text-xl text-secondary-300 max-w-2xl mx-auto">
-                Every detail designed to convert visitors into consultations
+                Every detail designed to convert visitors into appointments
               </p>
             </div>
 
@@ -357,6 +362,9 @@ export default function PlasticSurgeryWebDesignNoPricingPage() {
             </div>
           </div>
         </section>
+
+        {/* Our Process */}
+        <ProcessSection content={processContent} />
 
         {/* Metrics Band */}
         <section className="relative py-20 md:py-28 overflow-hidden">
@@ -542,10 +550,10 @@ export default function PlasticSurgeryWebDesignNoPricingPage() {
           </div>
         </section>
 
-        {/* Feature Deep-Dives Section */}
+        {/* Feature Deep-Dives Section - healthcare content */}
         <FeatureSection content={featuresContent} />
 
-        {/* NO PRICING SECTION - Removed for A/B test */}
+        {/* NO PRICING SECTION - Removed for ad-traffic variant */}
 
         {/* About Section */}
         <section className="relative py-20 md:py-32 overflow-hidden">
@@ -567,10 +575,10 @@ export default function PlasticSurgeryWebDesignNoPricingPage() {
                 The Team Behind Your Success
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-secondary-800 mb-6">
-                Meet the Dynamic SEO & Web<br className="hidden md:block" /> Developer Duo in Southern NH
+                {aboutContent.headline}
               </h2>
               <p className="text-lg md:text-xl text-secondary-500 max-w-2xl mx-auto">
-                A husband-and-wife team dedicated to helping healthcare practices thrive online
+                {aboutContent.subheadline}
               </p>
             </div>
 
@@ -726,23 +734,23 @@ export default function PlasticSurgeryWebDesignNoPricingPage() {
 
       <div className="h-16 md:hidden" />
 
-      {/* Structured Data - Service Schema (no offers/pricing) */}
+      {/* Structured Data - Service Schema (Medical Practice Web Design) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            name: "Plastic Surgery Web Design",
+            name: "Medical Practice Web Design",
             description:
-              "Premium web design services for plastic surgery practices. HIPAA-conscious infrastructure, conversion-focused design, and SEO-ready structure built to generate consult requests.",
+              "Premium web design services for healthcare practices. HIPAA-conscious infrastructure, conversion-focused design, and SEO-ready structure built to generate patient appointments.",
             provider: {
               "@type": "Organization",
               name: "SERPreme SEO",
               url: "https://serpremeseo.com",
               logo: "https://serpremeseo.com/brand/serpremeseo-logo.png",
             },
-            serviceType: "Web Design",
+            serviceType: "Medical Web Design",
             areaServed: {
               "@type": "Country",
               name: "United States",
@@ -801,8 +809,8 @@ export default function PlasticSurgeryWebDesignNoPricingPage() {
               {
                 "@type": "ListItem",
                 position: 3,
-                name: "Plastic Surgery Web Design",
-                item: "https://serpremeseo.com/services/plastic-surgery-web-design",
+                name: "Medical Web Design",
+                item: "https://serpremeseo.com/services/medical-web-design",
               },
             ],
           }),

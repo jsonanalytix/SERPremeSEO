@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { featuresContent as defaultFeaturesContent } from "@/content/plasticSurgeryWebDesign";
 
 // Feature icon component
 const FeatureIcon = ({ type }: { type: string }) => {
@@ -92,11 +91,26 @@ const FeatureIcon = ({ type }: { type: string }) => {
   );
 };
 
-interface FeatureSectionProps {
-  content?: typeof defaultFeaturesContent;
+interface FeatureItem {
+  id: string;
+  title: string;
+  navLabel: string;
+  description: string;
+  bullets: string[];
+  icon: string;
 }
 
-export default function FeatureSection({ content = defaultFeaturesContent }: FeatureSectionProps) {
+export interface FeaturesContentData {
+  headline: string;
+  subheadline: string;
+  features: FeatureItem[];
+}
+
+interface FeatureSectionProps {
+  content: FeaturesContentData;
+}
+
+export default function FeatureSection({ content }: FeatureSectionProps) {
   const [activeFeature, setActiveFeature] = useState<string>(
     content.features[0]?.id || ""
   );

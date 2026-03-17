@@ -6,3 +6,5 @@ export { default as PricingCards } from "./PricingCards";
 export { default as FAQ } from "./FAQ";
 export { default as HeroSection } from "./HeroSection";
 export { default as FeatureSection } from "./FeatureSection";
+export { default as SpecialtiesGrid } from "./SpecialtiesGrid";
+export { default as ProcessSection } from "./ProcessSection";

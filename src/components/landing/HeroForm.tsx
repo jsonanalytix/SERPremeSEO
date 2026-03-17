@@ -9,7 +9,7 @@ import {
   projectTypeOptions 
 } from "@/lib/validation/formSchema";
 import { trackFormSubmit } from "@/lib/tracking/events";
-import { heroContent as defaultHeroContent } from "@/content/plasticSurgeryWebDesign";
+import { heroContent as defaultHeroContent } from "@/content/healthcareWebDesign";
 import { handlePhoneInput } from "@/lib/utils/phoneFormatter";
 import { captureAttribution, getAttributionData } from "@/lib/utils/attributionCapture";
 
@@ -225,7 +225,7 @@ export default function HeroForm({
             <input
               id="practiceName"
               type="text"
-              placeholder="Elite Plastic Surgery"
+              placeholder="Lakewood Family Medicine"
               className={`w-full px-3.5 py-2.5 bg-white border rounded-lg text-sm text-secondary-900 placeholder:text-secondary-300 placeholder:font-light focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 ${
                 errors.practiceName 
                   ? "border-red-300 focus:border-red-500" 
@@ -250,7 +250,7 @@ export default function HeroForm({
             <input
               id="email"
               type="email"
-              placeholder="jane@eliteplasticsurgery.com"
+              placeholder="dr.smith@yourpractice.com"
               className={`w-full px-3.5 py-2.5 bg-white border rounded-lg text-sm text-secondary-900 placeholder:text-secondary-300 placeholder:font-light focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 ${
                 errors.email 
                   ? "border-red-300 focus:border-red-500" 

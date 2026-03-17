@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import HeroForm from "./HeroForm";
-import { heroContent as defaultHeroContent } from "@/content/plasticSurgeryWebDesign";
+import { heroContent as defaultHeroContent } from "@/content/healthcareWebDesign";
 
 interface HeroSectionProps {
   content?: typeof defaultHeroContent;
@@ -67,7 +67,7 @@ const TrustIcon = ({ type }: { type: string }) => {
 
 export default function HeroSection({
   content = defaultHeroContent,
-  portfolioHref = "/services/plastic-surgery-web-design/portfolio",
+  portfolioHref = "/services/medical-web-design/portfolio",
 }: HeroSectionProps) {
   // Scroll to top on mount to prevent browser scroll restoration
   useEffect(() => {

@@ -13,6 +13,7 @@ import {
   painPointsContent,
   metricsContent,
   comparisonContent,
+  featuresContent,
   finalCtaContent,
   siteConfig,
 } from "@/content/plasticSurgeryWebDesign";
@@ -605,7 +606,7 @@ export default function PlasticSurgeryWebDesignPage() {
         </section>
 
         {/* Feature Deep-Dives Section */}
-        <FeatureSection />
+        <FeatureSection content={featuresContent} />
 
         {/* Pricing Section */}
         <PricingCards />
