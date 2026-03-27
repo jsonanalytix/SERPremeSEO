@@ -69,6 +69,7 @@ const StatusTimeline = ({
   // Format date for timeline
   const formatTimelineDate = (dateString: string) => {
     return new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Denver',
       month: 'short',
       day: 'numeric',
       year: 'numeric',
@@ -240,6 +241,7 @@ export default function LeadDetail({ lead, isOpen, onClose, onUpdate }: LeadDeta
 
   const formatDate = (dateString: string) => {
     return new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Denver',
       weekday: 'long',
       year: 'numeric',
       month: 'long',

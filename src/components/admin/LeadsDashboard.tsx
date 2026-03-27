@@ -226,8 +226,8 @@ export default function LeadsDashboard() {
             <p className="text-xs text-secondary-500">New Today</p>
             <p className="text-lg font-semibold text-blue-600">
               {leads.filter(l => {
-                const today = new Date().toDateString()
-                return new Date(l.created_at).toDateString() === today && l.status === 'new'
+                const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Denver' })
+                return fmt.format(new Date(l.created_at)) === fmt.format(new Date()) && l.status === 'new'
               }).length}
             </p>
           </div>

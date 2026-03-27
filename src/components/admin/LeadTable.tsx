@@ -47,6 +47,7 @@ export default function LeadTable({
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Denver',
       month: 'short',
       day: 'numeric',
       year: 'numeric',

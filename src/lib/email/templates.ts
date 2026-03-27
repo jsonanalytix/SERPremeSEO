@@ -44,7 +44,7 @@ function formatProjectType(projectType: string | null | undefined): string {
  */
 export function getClientNotificationEmail(lead: LeadEmailData): EmailContent {
   const submittedAt = lead.submittedAt || new Date().toLocaleString("en-US", {
-    timeZone: "America/New_York",
+    timeZone: "America/Denver",
     dateStyle: "full",
     timeStyle: "short",
   });
