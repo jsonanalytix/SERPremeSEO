@@ -142,7 +142,7 @@ export default function MedicalWebDesignNoPricingPage() {
 
       <main>
         {/* Hero Section - healthcare content */}
-        <HeroSection content={heroContent} portfolioHref="/services/medical-web-design/portfolio" />
+        <HeroSection content={heroContent} portfolioHref="/services/plastic-surgery-web-design/portfolio" />
 
         {/* Problem/Solution Section */}
         <section className="py-16 md:py-24 bg-white">

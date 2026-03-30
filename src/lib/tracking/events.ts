@@ -42,6 +42,14 @@ export function trackFormSubmit(
   // Send to GTM via dataLayer
   if (window.dataLayer) {
     window.dataLayer.push(eventData);
+
+    // GTM trigger expects serp_contact_submit for Google Ads conversion,
+    // GA4 contact form event, lead sheet population, and thank-you page redirect
+    window.dataLayer.push({
+      event: "serp_contact_submit",
+      form_location: formLocation,
+      practice_name: practiceName || "unknown",
+    });
   }
 }
 
