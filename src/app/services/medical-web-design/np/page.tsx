@@ -742,15 +742,21 @@ export default function MedicalWebDesignNoPricingPage() {
             "@context": "https://schema.org",
             "@type": "Service",
             name: "Medical Practice Web Design",
+            alternateName: "Medical Website Design",
             description:
-              "Premium web design services for healthcare practices. HIPAA-conscious infrastructure, conversion-focused design, and SEO-ready structure built to generate patient appointments.",
+              "Premium medical website design services for healthcare practices, therapy clinics, and multi-provider groups. HIPAA conscious website infrastructure, conversion-focused clinic website design, and SEO-ready therapy website design built to generate patient appointments.",
             provider: {
               "@type": "Organization",
               name: "SERPreme SEO",
               url: "https://serpremeseo.com",
               logo: "https://serpremeseo.com/brand/serpremeseo-logo.png",
             },
-            serviceType: "Medical Web Design",
+            serviceType: [
+              "Medical Website Design",
+              "HIPAA Compliant Website Design",
+              "Therapy Website Design",
+              "Clinic Website Design",
+            ],
             areaServed: {
               "@type": "Country",
               name: "United States",

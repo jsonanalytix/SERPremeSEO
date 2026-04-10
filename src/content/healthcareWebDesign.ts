@@ -6,7 +6,7 @@ export const heroContent = {
   headline: "Medical Practice Web Design That Grows Your Patient Base",
   subheadline:
     "Your website should work as hard as you do\u2014bringing in new patients, not collecting dust.",
-  body: "We build conversion-focused websites for private medical practices across every specialty. HIPAA-conscious infrastructure, mobile-first performance, and patient-journey design that turns visitors into booked appointments\u2014without the enterprise price tag.",
+  body: "We build conversion-focused medical website designs for private practices across every specialty\u2014from therapy clinics to multi-provider groups. HIPAA conscious website infrastructure, mobile-first performance, and patient-journey design that turns visitors into booked appointments\u2014without the enterprise price tag.",
   ctaPrimary: "Get Your Free Quote",
   ctaSecondary: "View Portfolio",
   trustMarkers: [
@@ -19,14 +19,14 @@ export const heroContent = {
   formPrivacyNotice:
     "Practice inquiries only. Please do not submit patient names, photos, medical details, or any protected health information (PHI) through this form.",
   whoWeWorkWith:
-    "We partner with independent doctors, dentists, therapists, and specialists who want a premium website without the enterprise price tag.",
+    "We partner with independent doctors, dentists, therapy practices, clinics, and specialists who need a premium medical website design\u2014without the enterprise price tag.",
 };
 
 export const problemSolutionContent = {
-  headline: "Healthcare website design built to earn patient trust",
+  headline: "Medical website design built to earn patient trust",
   subheadline: "And turn site visitors into booked appointments.",
   painParagraph:
-    "Most medical practice websites are outdated, slow, or built from a template that looks like every other clinic in town. They list services but fail to convert visitors into appointments. There\u2019s no online scheduling, the mobile experience is frustrating, and your site doesn\u2019t show up when patients search for your services.",
+    "Most medical practice websites are outdated, slow, or built from a template that looks like every other clinic in town. Whether you need a therapy website design that feels welcoming or a clinic website design that drives appointments, the same problems persist\u2014no online scheduling, a frustrating mobile experience, and zero visibility when patients search for your services.",
   featureCards: [
     {
       icon: "responsive",
@@ -46,7 +46,7 @@ export const problemSolutionContent = {
     },
   ],
   closingParagraph:
-    "Our Medical Practice Web Design service gives you a fast, modern website that earns patient trust, drives appointment requests, and integrates the tools your practice actually needs\u2014from HIPAA-conscious hosting to seamless online scheduling.",
+    "Our medical website design service gives you a fast, modern site that earns patient trust, drives appointment requests, and integrates the tools your practice actually needs\u2014from HIPAA conscious website hosting to seamless online scheduling.",
 };
 
 export const specialtiesContent = {
@@ -64,7 +64,7 @@ export const specialtiesContent = {
       icon: "tooth",
       title: "Dentistry & Orthodontics",
       description:
-        "Showcase cosmetic and general dental services with appointment-ready pages and smile galleries.",
+        "Showcase cosmetic and general dental services with appointment-ready pages, smile galleries, and HIPAA conscious website standards for patient data.",
     },
     {
       icon: "spine",
@@ -80,15 +80,15 @@ export const specialtiesContent = {
     },
     {
       icon: "brain",
-      title: "Mental Health & Therapy",
+      title: "Therapy & Mental Health Practices",
       description:
-        "Calming, trust-forward design that makes it easy for patients to take the first step and reach out.",
+        "Therapy website design built around calming, trust-forward layouts that make it easy for patients to take the first step and reach out.",
     },
     {
       icon: "urgentcare",
-      title: "Urgent Care & Walk-In Clinics",
+      title: "Clinics & Urgent Care",
       description:
-        "Fast-loading pages that surface hours, wait times, and location info for patients who need care now.",
+        "Clinic website design with fast-loading pages that surface hours, wait times, and location info for patients who need care now.",
     },
     {
       icon: "eye",
@@ -208,7 +208,7 @@ export const painPointsContent = {
     {
       pain: "I\u2019m not sure my site is HIPAA-compliant",
       response:
-        "Full-stack HIPAA-conscious infrastructure from hosting to email to forms. Security isn\u2019t an afterthought\u2014it\u2019s foundational.",
+        "Every site we deliver is built with HIPAA conscious website infrastructure from the ground up\u2014secure hosting, encrypted forms, and compliant email configuration. Security isn\u2019t an afterthought\u2014it\u2019s foundational.",
     },
   ],
 };
@@ -349,7 +349,7 @@ export const featuresContent = {
       title: "Custom Design",
       navLabel: "Custom Design",
       description:
-        "Every site is designed from scratch for your practice\u2014no templates, no cookie-cutter layouts. The result is a premium feel that reflects the quality of care you provide.",
+        "Every medical website design is built from scratch for your practice\u2014no templates, no cookie-cutter layouts. The result is a premium feel that reflects the quality of care you provide.",
       bullets: [
         "Bespoke design tailored to your brand and specialty",
         "Trust-building visual hierarchy for patient confidence",
@@ -363,7 +363,7 @@ export const featuresContent = {
       title: "HIPAA Infrastructure",
       navLabel: "HIPAA",
       description:
-        "Full-stack HIPAA-conscious infrastructure from hosting to email to forms. Patient data security is foundational, not an afterthought.",
+        "Full-stack HIPAA conscious website infrastructure from hosting to email to forms. Patient data security is foundational, not an afterthought.",
       bullets: [
         "Secure hosting environment",
         "Encrypted form submissions",
@@ -499,12 +499,17 @@ export const faqContent = {
     {
       question: "Is the site HIPAA-compliant?",
       answer:
-        "Yes. We build on HIPAA-conscious infrastructure from the ground up\u2014secure hosting, encrypted form submissions, and compliant email configuration. Patient data security is foundational to every site we deliver, not a bolt-on.",
+        "Yes. Every site we deliver is built with HIPAA conscious website infrastructure from the ground up\u2014secure hosting, encrypted form submissions, and compliant email configuration. Our HIPAA conscious website design ensures patient data security is foundational, not a bolt-on.",
     },
     {
       question: "Can you help with SEO?",
       answer:
         "Every site ships with an SEO foundation: schema markup, optimized page structure, local search signals, and E-E-A-T aligned content architecture. For practices that want ongoing SEO management, we offer dedicated monthly packages built on the same foundation.",
+    },
+    {
+      question: "Do you design websites for therapy practices and clinics?",
+      answer:
+        "Absolutely. Therapy website design and clinic website design are two of our core specialties. We understand that therapy practices need calming, trust-forward layouts that encourage patients to reach out, while clinics need fast-loading pages that surface hours, locations, and scheduling. Every project is tailored to your practice type\u2014from solo therapists to multi-location clinics.",
     },
   ],
 };

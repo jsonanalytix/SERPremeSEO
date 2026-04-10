@@ -6,7 +6,7 @@ const pageUrl = `${baseUrl}/services/medical-web-design/np`;
 export const metadata: Metadata = {
   title: "Medical Practice Web Design | Patient-Generating Websites | SERPreme",
   description:
-    "Medical practice web design built to grow your patient base. Conversion-first UX, HIPAA-conscious infrastructure, and SEO-ready structure. Get a free quote.",
+    "Medical website design built to grow your patient base. HIPAA conscious website infrastructure, conversion-first UX, and SEO-ready structure for clinics and therapy practices. Get a free quote.",
   alternates: {
     canonical: pageUrl,
   },

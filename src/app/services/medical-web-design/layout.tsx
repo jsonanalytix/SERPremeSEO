@@ -7,7 +7,7 @@ const siteName = "SERPreme SEO";
 export const metadata: Metadata = {
   title: "Medical Practice Web Design | SERPreme SEO",
   description:
-    "Medical practice web design built to grow your patient base. HIPAA-conscious infrastructure, conversion-focused design, and SEO-ready structure. Get a free quote.",
+    "Medical website design built to grow your patient base. HIPAA conscious website infrastructure, conversion-focused design, and SEO-ready structure for therapy practices and clinics. Get a free quote.",
   keywords: [
     "medical web design",
     "medical website design",
@@ -15,8 +15,11 @@ export const metadata: Metadata = {
     "doctor website design",
     "medical practice website",
     "HIPAA compliant website",
+    "HIPAA compliant website design",
     "healthcare website design",
     "physician website design",
+    "therapy website design",
+    "clinic website design",
   ],
   authors: [{ name: "SERPreme SEO" }],
   creator: "SERPreme SEO",
@@ -33,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Medical Practice Web Design | SERPreme SEO",
     description:
-      "Medical practice web design built to grow your patient base. HIPAA-conscious infrastructure, conversion-focused design, and SEO-ready structure.",
+      "Medical website design built to grow your patient base. HIPAA conscious website infrastructure, conversion-focused design for therapy practices, clinics, and more.",
     url: pageUrl,
     siteName: siteName,
     locale: "en_US",
@@ -51,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Medical Practice Web Design | SERPreme SEO",
     description:
-      "Medical practice web design built to grow your patient base. HIPAA-conscious infrastructure, conversion-focused design, and SEO-ready structure.",
+      "Medical website design built to grow your patient base. HIPAA conscious website infrastructure, conversion-focused design for therapy practices, clinics, and more.",
     images: [`${baseUrl}/brand/serpremeseo-logo.png`],
   },
   robots: {
